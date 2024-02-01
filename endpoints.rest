@@ -1,0 +1,13 @@
+GET http://localhost:3000/shoppinglists
+
+
+POST http://localhoste:3000/bookmarks
+Content-Type: application/json
+
+{
+    "title": "",
+    "createdAt": "",
+    "updatedAt": "",
+}
+
+get http://localhost:3000/shoppinglists/id
