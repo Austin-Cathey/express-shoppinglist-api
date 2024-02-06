@@ -1,18 +1,21 @@
+require("dotenv").config();
 const express = require("express");
 const dayjs = require('dayjs')
 //import dayjs from 'dayjs' // ES 2015
 dayjs().format()
+const port = process.env.PORT ;
 
 const app = express();
 
 //mongoose stuff
 const mongoose = require('mongoose');
 const ShoppingList = require("./models/ShoppingList");
-mongoose.connect(process.env.DATABASE_URL)
-mongoose.connect(db_url)
-const db = mongoose.connection
-db.once("open", () => console.log("connected to mongoDB"))
+/* const db_url = 'process.env.DATABASE_URL' */
+mongoose.connect(process.env.DATABASE_URL);
+const db = mongoose.connection;
+db.once("open", () => console.log("connected to mongoDB"));
 
+app.use(express.json)
 //endpoints
 //GET all
 app.get('/shoppinglists', (req, res) => {
@@ -65,6 +68,3 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
     res.status(404).json({ error: 'route not found' })
   })
 
-  //PORT
-const config = { port: process.env.PORT || 3000 };
-app.use(express.json)
