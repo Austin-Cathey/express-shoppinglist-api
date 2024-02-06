@@ -36,7 +36,30 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
       })
       .catch((error) => res.status(400).json({ message: 'Bad request' }))
   })
-  
+  //PATCH target list
+  app.patch('/shoppinglists/:shoppinglistId', (req, res) => {
+    ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+        if (shoppinglist) {
+        shoppinglist.title = req.body.title || shoppinglist.title
+        shoppinglist.updatedAt = req.body.updatedAt 
+        shoppinglist.save()
+        res.status(200).json(shoppinglist)
+    }else {
+        res.status(404).json({ "message": "not found" })
+    }})
+    .catch((error) => res.status(404).json({ "message": "bad request" }))
+})
+  //DELETE
+  app.delete('/shoppinglists/:shoppinglistId', (req, res) => {
+    ShoppingList.findById(req.params.shoppinglistId).then((results) => {
+        if (bookmark) {
+            //delete 
+        }else {
+            res.status(404).json({ "message": "not found" })
+        }})
+        .catch((error) => res.status(404).json({ "message": "bad request" }))
+})
+
   //all-else error
   app.get('*', function (req, res) {
     res.status(404).json({ error: 'route not found' })
