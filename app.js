@@ -64,9 +64,10 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
 })
   //DELETE
   app.delete('/shoppinglists/:shoppinglistId', (req, res) => {
-    ShoppingList.findById(req.params.shoppinglistId).then((results) => {
-        if (bookmark) {
-            //delete 
+    ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+        if (shoppinglist) {
+            shoppinglist.deleteOne()
+            res.status(200).json(shoppinglist)
         }else {
             res.status(404).json({ "message": "not found" })
         }})
