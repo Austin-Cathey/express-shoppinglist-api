@@ -73,6 +73,18 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         }})
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+///items
+app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
+  ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+    if (shoppinglist) {
+  ShoppingList.items.push(req.body)
+  shoppinglist.save
+  res.status(201).json(ShoppingList)
+}else {
+  res.status(404).json({ "message": "not found" })
+}})
+.catch((error) => res.status(404).json({ "message": "bad request" }))
+})
 
   //all-else error
   app.get('*', function (req, res) {

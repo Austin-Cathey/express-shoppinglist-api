@@ -5,19 +5,21 @@ POST http://localhost:3000/shoppinglists
 Content-Type: application/json
 
 {
-    "title": "title?!",
+    "title": "list",
     "createdAt": "2024-02-06",
-    "updatedAt": "2024-01-04T23:03:10.635Z"
+    "updatedAt": "2024-01-04T23:03:10.635Z",
+    "items": []
 }
 
 ###
 get http://localhost:3000/shoppinglists/id
 
-PATCH http://localhost:3000/shoppinglists/65bc433d6097a46e9ac86795 
+###
+PATCH http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343 
 Content-Type: application/json
 
 {
-    "title": "title?!", 
+    "title": "title?!???", 
     "createdAt": "2024-02-06",
     "updatedAt": "2024-01-04T23:03:10.635Z"
 
@@ -25,3 +27,11 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
+
+###
+POST http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
+Content-Type: application/json
+
+{
+    "items": [{"item": "garlic"}]
+}
