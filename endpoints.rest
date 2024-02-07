@@ -1,6 +1,7 @@
+### get all
 GET http://localhost:3000/shoppinglists
 
-###
+### new list
 POST http://localhost:3000/shoppinglists
 Content-Type: application/json
 
@@ -11,27 +12,29 @@ Content-Type: application/json
     "items": []
 }
 
-###
-get http://localhost:3000/shoppinglists/id
+### get individial 
+get http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
 
-###
+### new list
 PATCH http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343 
 Content-Type: application/json
 
 {
     "title": "title?!???", 
     "createdAt": "2024-02-06",
-    "updatedAt": "2024-01-04T23:03:10.635Z"
+    "updatedAt": "2024-01-04T23:03:10.635Z",
+    "items": []
 
 }
 
-###
+### delete
 DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
 
-###
-POST http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
+### patch items
+PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
 Content-Type: application/json
 
-{
-    "items": [{"item": "garlic"}]
+{"items":
+[{"item":"garlic"}]
 }
+
