@@ -5,7 +5,7 @@ POST http://localhost:3000/shoppinglists
 Content-Type: application/json
 
 {
-    "title": "title!!!",
+    "title": "title?!",
     "createdAt": "2024-02-06",
     "updatedAt": "2024-01-04T23:03:10.635Z"
 }
@@ -13,5 +13,15 @@ Content-Type: application/json
 ###
 get http://localhost:3000/shoppinglists/id
 
+PATCH http://localhost:3000/shoppinglists/65bc433d6097a46e9ac86795 
+Content-Type: application/json
+
+{
+    "title": "title?!", 
+    "createdAt": "2024-02-06",
+    "updatedAt": "2024-01-04T23:03:10.635Z"
+
+}
+
 ###
-DELETE http://localhost:3000/shoppinglists/id
+DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
