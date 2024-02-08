@@ -78,7 +78,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
 app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
-  shoppinglist.items.push(req.body)
+  shoppinglist.items.push(req.body.items)
   shoppinglist.save()
   res.status(201).json(shoppinglist)
 }else {

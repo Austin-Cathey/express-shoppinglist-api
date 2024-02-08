@@ -34,7 +34,9 @@ DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
 PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
 Content-Type: application/json
 
-{"items":
-[{"item":"garlic"}]
+{"items": 
+{"name":"onions",
+"quantity": "10",
+"purchased": false}
 }
 
