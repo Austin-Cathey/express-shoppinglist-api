@@ -12,31 +12,30 @@ Content-Type: application/json
     "items": []
 }
 
-### get individial 
+### get individial:id
 get http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
 
-### new list
+### new list:id
 PATCH http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343 
 Content-Type: application/json
 
 {
-    "title": "title?!???", 
+    "title": "new list", 
     "createdAt": "2024-02-06",
     "updatedAt": "2024-01-04T23:03:10.635Z",
     "items": []
-
 }
 
-### delete
+### delete:id
 DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
 
-### patch items
+### patch items:id/items
 PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
 Content-Type: application/json
 
 {"items": 
 {"name":"onions",
 "quantity": "10",
-"purchased": false}
+"purchased": true}
 }
 

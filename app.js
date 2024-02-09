@@ -4,17 +4,18 @@ const morgan = require("morgan")
 const dayjs = require("dayjs")
 //import dayjs from 'dayjs' // ES 2015
 dayjs().format()
-const port = process.env.PORT;
+//port
+const port = process.env.PORT
 
 
 //mongoose stuff
 const mongoose = require('mongoose');
 const ShoppingList = require("./models/ShoppingList");
-/* const db_url = 'process.env.DATABASE_URL' */
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.once("open", () => console.log("connected to mongoDB"));
 
+//app.use
 const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
@@ -63,7 +64,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
     }})
     .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
-  //DELETE
+  //DELETE target list
   app.delete('/shoppinglists/:shoppinglistId', (req, res) => {
     ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
         if (shoppinglist) {
@@ -74,7 +75,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         }})
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
-///items
+///PATCH items array
 app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
@@ -91,5 +92,5 @@ app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
   app.get('*', function (req, res) {
     res.status(404).json({ error: 'route not found' })
   })
-
+//port listen
   app.listen(port, () => console.log(`Application is running on port ${port}`))
