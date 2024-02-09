@@ -76,7 +76,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
 ///PATCH items array
-app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
+app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
   shoppinglist.items.push(req.body.items)
@@ -87,7 +87,30 @@ app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
 }})
 .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
-
+//DELETE target item
+app.delete('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
+  ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+      if (shoppinglist) {
+        shoppinglist.items.id(req.params.itemId).deleteOne()
+        shoppinglist.save()
+          res.status(200).json(shoppinglist)
+      }else {
+          res.status(400).json({ "message": "not found" })
+      }})
+      .catch((error) => res.status(404).json({ "message": "bad request" }))
+})
+///PATCH indvidual items? 
+/* app.patch('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
+  ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+    if (shoppinglist) {
+  shoppinglist.items.push(req.body.items)
+  shoppinglist.save()
+  res.status(201).json(shoppinglist)
+}else {
+  res.status(404).json({ "message": "not found" })
+}})
+.catch((error) => res.status(404).json({ "message": "bad request" }))
+}) */
   //all-else error
   app.get('*', function (req, res) {
     res.status(404).json({ error: 'route not found' })

@@ -12,7 +12,7 @@ Content-Type: application/json
     "items": []
 }
 
-### get individial:id
+### get individial list:id
 get http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
 
 ### new list:id
@@ -26,16 +26,21 @@ Content-Type: application/json
     "items": []
 }
 
-### delete:id
+### delete list :id
 DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
 
 ### patch items:id/items
-PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
+POST http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
 Content-Type: application/json
 
 {"items": 
-{"name":"onions",
+{"name":"strawberries",
 "quantity": "10",
-"purchased": true}
+"purchased": false}
 }
 
+### delete item :itemid
+DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c39cf93114fae18b929797
+
+### edit an item
+PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c39cf93114fae18b929797
