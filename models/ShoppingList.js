@@ -7,14 +7,14 @@ dayjs().format()
 
 const shoppingListSchema = new mongoose.Schema({
     title: {type: String, max: 50, required: true},
-    createdAt: {type: Date, timestamp: true},
-    updatedAt: {type: Date, timestamp: true},
-    items: [{
+    items: [{ type: new mongoose.Schema({
         name: String,
         quantity: Number,
-        purchased: Boolean
+        purchased: Boolean,  
+},
+{ timestamps: true })
 }]
-
-})
+},
+{ timestamps: true })
 
 module.exports = mongoose.model('ShoppingList', shoppingListSchema)

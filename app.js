@@ -75,7 +75,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         }})
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
-///PATCH items array
+///Post items to array
 app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
@@ -87,6 +87,22 @@ app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
 }})
 .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+// GET one target item 
+/* app.get('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
+  ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+      if (shoppinglist) {
+        shoppinglist.items.findById(req.params.itemId).then ((item) => {
+          if (item) 
+          {res.status(200).json(item)}
+          else{res.status(400).json({ "message": "not found" })
+              }
+        })
+          
+      }else {
+          res.status(400).json({ "message": "not found" })
+      }})
+      .catch((error) => res.status(404).json({ "message": "bad request" }))
+}) */
 //DELETE target item
 app.delete('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
@@ -100,17 +116,27 @@ app.delete('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
       .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
 ///PATCH indvidual items? 
-/* app.patch('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
+app.patch('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
-  shoppinglist.items.push(req.body.items)
-  shoppinglist.save()
+      const updateItem = shoppinglist.update( 
+        {id: req.params.itemId},
+        { $set: {
+          name: req.body.items.name, 
+          quantity: req.body.items.quantity, 
+          purchased: req.body.items.purchased
+        }
+      })
+      shoppinglist.save()
+      console.log(req.body.items.name)
+  /* shoppinglist.save() */
   res.status(201).json(shoppinglist)
 }else {
   res.status(404).json({ "message": "not found" })
 }})
-.catch((error) => res.status(404).json({ "message": "bad request" }))
-}) */
+/* .catch((error) => res.status(404).json({ "message": "bad request" })) */
+})
+
   //all-else error
   app.get('*', function (req, res) {
     res.status(404).json({ error: 'route not found' })

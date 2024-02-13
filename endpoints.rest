@@ -21,26 +21,34 @@ Content-Type: application/json
 
 {
     "title": "new list", 
-    "createdAt": "2024-02-06",
-    "updatedAt": "2024-01-04T23:03:10.635Z",
     "items": []
 }
 
 ### delete list :id
-DELETE http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343
+DELETE http://localhost:3000/shoppinglists/65cb8edbc6ce16eb87c552b0
 
-### patch items:id/items
+### new items:id/items
 POST http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
 Content-Type: application/json
 
 {"items": 
-{"name":"strawberries",
+{"name":"blackberries",
 "quantity": "10",
 "purchased": false}
 }
 
+### Get 1 item
+GET http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65ca3ecb7685a31fc4017b47
+
 ### delete item :itemid
-DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c39cf93114fae18b929797
+DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fae0bbc4bd2376cd7941
 
 ### edit an item
-PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c39cf93114fae18b929797
+PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fb3c10519fb6859de98a
+Content-Type: application/json
+
+{"items": 
+{"name":"berries",
+"quantity": "10",
+"purchased": false}
+}
