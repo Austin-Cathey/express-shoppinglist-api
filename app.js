@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
+const cors = require("cors")
 const dayjs = require("dayjs")
 //import dayjs from 'dayjs' // ES 2015
 dayjs().format()
@@ -19,6 +20,7 @@ db.once("open", () => console.log("connected to mongoDB"));
 const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(cors())
 
 //endpoints
 //GET all
@@ -119,16 +121,24 @@ app.delete('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
 app.patch('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
-      const updateItem = shoppinglist.update( 
-        {id: req.params.itemId},
+      const updateItem = shoppinglist.findOne(
+        {"item.id": req.params.itemId}
+      ).then((err, data) => {
+        if(err) {
+          res.send(err)
+        }
+        console.log(data)
+        res.status(200).json(shoppinglist)
+      }) 
+       /*  {_id: req.params.itemId},
         { $set: {
           name: req.body.items.name, 
           quantity: req.body.items.quantity, 
           purchased: req.body.items.purchased
         }
-      })
-      shoppinglist.save()
-      console.log(req.body.items.name)
+      }) */
+      //shoppinglist.save()
+      console.log(data)
   /* shoppinglist.save() */
   res.status(201).json(shoppinglist)
 }else {

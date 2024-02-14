@@ -47,8 +47,5 @@ DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fa
 PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fb3c10519fb6859de98a
 Content-Type: application/json
 
-{"items": 
-{"name":"berries",
-"quantity": "10",
-"purchased": false}
+{"name":"berries"
 }
