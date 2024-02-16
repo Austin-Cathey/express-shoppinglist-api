@@ -13,10 +13,13 @@ Content-Type: application/json
 }
 
 ### get individial list:id
-get http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
+###get http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
+
+### get individual list:title
+get http://localhost:3000/shoppinglists/
 
 ### new list:id
-PATCH http://localhost:3000/shoppinglists/65c2c88ad3c892387beaf343 
+PATCH http://localhost:3000/shoppinglists/
 Content-Type: application/json
 
 {
@@ -25,7 +28,7 @@ Content-Type: application/json
 }
 
 ### delete list :id
-DELETE http://localhost:3000/shoppinglists/65cb8edbc6ce16eb87c552b0
+DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c
 
 ### new items:id/items
 POST http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items
@@ -38,7 +41,7 @@ Content-Type: application/json
 }
 
 ### Get 1 item
-GET http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65ca3ecb7685a31fc4017b47
+GET http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fb3c10519fb6859de98a
 
 ### delete item :itemid
 DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fae0bbc4bd2376cd7941
@@ -47,5 +50,8 @@ DELETE http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fa
 PATCH http://localhost:3000/shoppinglists/65c2c5c773aab288435da09c/items/65c4fb3c10519fb6859de98a
 Content-Type: application/json
 
-{"name":"berries"
+{"name":"blackberries",
+"quantity": "10",
+"purchased": false
 }
+

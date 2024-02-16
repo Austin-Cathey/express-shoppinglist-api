@@ -25,7 +25,7 @@ app.use(cors())
 //endpoints
 //GET all
 app.get('/shoppinglists', (req, res) => {
-    ShoppingList.find().then((results) => {
+    ShoppingList.find(/* {}, 'title' */).then((results) => {
       if (results) {
         res.status(200).json(results)
       }else {
@@ -34,14 +34,27 @@ app.get('/shoppinglists', (req, res) => {
       })
       .catch((error) => res.status(400).json({ message: 'Bad request' }))
 })
+//GET list by title
+app.get('/shoppinglists/?title=shoppingTitle', (req, res) => {
+  ShoppingList.findOne({ title: req.params.shoppingTitle}).then((results) => {
+    if (results) {
+      res.status(200).json(results)
+    }else {
+      res.status(404).json({ message: 'not found'})
+    }
+    })
+    .catch((error) => res.status(400).json({ message: 'Bad request' }))
+})
+
 //POST new list
 app.post('/shoppinglists', (req, res) => {
     const newShoppingList = new ShoppingList(req.body)
     newShoppingList.save()
     res.status(201).json(newShoppingList)
 })
+
 //GET target list
-app.get('/shoppinglists/:shoppinglistId', (req, res) => {
+/* app.get('/shoppinglists/:shoppinglistId', (req, res) => {
     ShoppingList.findById(req.params.shoppinglistId)
       .then((results) => {
         if (results) {
@@ -51,9 +64,10 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         }
       })
       .catch((error) => res.status(400).json({ message: 'Bad request' }))
-  })
+  }) */
+
   //PATCH target list
-  app.patch('/shoppinglists/:shoppinglistId', (req, res) => {
+  app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
     ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
         if (shoppinglist) {
         shoppinglist.title = req.body.title || shoppinglist.title
@@ -66,6 +80,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
     }})
     .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+
   //DELETE target list
   app.delete('/shoppinglists/:shoppinglistId', (req, res) => {
     ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
@@ -77,6 +92,7 @@ app.get('/shoppinglists/:shoppinglistId', (req, res) => {
         }})
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+
 ///Post items to array
 app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
@@ -89,6 +105,7 @@ app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
 }})
 .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+
 // GET one target item 
 app.get('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
@@ -106,6 +123,7 @@ app.get('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   })
 .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
+
 //DELETE target item
 app.delete('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
