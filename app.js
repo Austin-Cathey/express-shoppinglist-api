@@ -66,7 +66,7 @@ app.post('/shoppinglists', (req, res) => {
       .catch((error) => res.status(400).json({ message: 'Bad request' }))
   }) */
 
-  //PATCH target list
+  //PATCH item
   app.patch('/shoppinglists/:shoppinglistId/items', (req, res) => {
     ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
         if (shoppinglist) {
@@ -83,18 +83,17 @@ app.post('/shoppinglists', (req, res) => {
 
   //DELETE target list
   app.delete('/shoppinglists/:shoppinglistId', (req, res) => {
-    ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
+    ShoppingList.findByIdAndDelete(req.params.shoppinglistId).then((shoppinglist) => {
         if (shoppinglist) {
-            shoppinglist.deleteOne()
-            res.status(200).json(shoppinglist)
+            res.status(200).json({ deleted: shoppinglist })
         }else {
             res.status(404).json({ "message": "not found" })
         }})
         .catch((error) => res.status(404).json({ "message": "bad request" }))
 })
 
-///Post items to array
-app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
+///Post items to array DOESN'T WORK WITH DB
+/* app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
   ShoppingList.findById(req.params.shoppinglistId).then((shoppinglist) => {
     if (shoppinglist) {
   shoppinglist.items.push(req.body.items)
@@ -104,7 +103,7 @@ app.post('/shoppinglists/:shoppinglistId/items', (req, res) => {
   res.status(404).json({ "message": "not found" })
 }})
 .catch((error) => res.status(404).json({ "message": "bad request" }))
-})
+}) */
 
 // GET one target item 
 app.get('/shoppinglists/:shoppinglistId/items/:itemId', (req, res) => {
